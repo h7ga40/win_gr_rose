@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{23b16da0-c6c7-44b7-b03b-7e58d7ab3505}</ProjectGuid>
+    <RootNamespace>usbhost</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>ClangCL</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>ClangCL</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>ClangCL</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>ClangCL</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>__GNUC__;__RX_LITTLE_ENDIAN__;PBUF_POOL_SIZE=2;TCP_WND=2*TCP_MSS;HTTPD_USE_CUSTOM_FSDATA=0;CFG_TUSB_MCU=OPT_MCU_RX65X;IR_USB0_USBI0=IR_PERIB_INTB185;IER_USB0_USBI0=IER_PERIB_INTB185;IEN_USB0_USBI0=IEN_PERIB_INTB185;IODEFINE_H_HISTORY;SSIZE_MAX=INT_MAX;WIN32;_DEBUG;HSBHOST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\softgun;..\softgun\stdinc;..\softgun\devices\sdcard;..\softgun\rx;..\tinyusb\hw;..\tinyusb\hw\mcu\renesas\rx\rx65n;..\tinyusb\hw\bsp\rx\boards\rx65n_target;..\tinyusb\lib\lwip\src\include;..\tinyusb\lib\lwip\src\include\ipv4;..\tinyusb\lib\lwip\src\include\lwip\apps;..\tinyusb\lib\networking;..\tinyusb\examples\host\cdc_msc_hid\src;..\tinyusb\src;.</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>__GNUC__;__RX_LITTLE_ENDIAN__;PBUF_POOL_SIZE=2;TCP_WND=2*TCP_MSS;HTTPD_USE_CUSTOM_FSDATA=0;CFG_TUSB_MCU=OPT_MCU_RX65X;IR_USB0_USBI0=IR_PERIB_INTB185;IER_USB0_USBI0=IER_PERIB_INTB185;IEN_USB0_USBI0=IEN_PERIB_INTB185;IODEFINE_H_HISTORY;SSIZE_MAX=INT_MAX;WIN32;NDEBUG;HSBHOST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\softgun;..\softgun\stdinc;..\softgun\devices\sdcard;..\softgun\rx;..\tinyusb\hw;..\tinyusb\hw\mcu\renesas\rx\rx65n;..\tinyusb\hw\bsp\rx\boards\rx65n_target;..\tinyusb\lib\lwip\src\include;..\tinyusb\lib\lwip\src\include\ipv4;..\tinyusb\lib\lwip\src\include\lwip\apps;..\tinyusb\lib\networking;..\tinyusb\examples\host\cdc_msc_hid\src;..\tinyusb\src;.</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>__GNUC__;__RX_LITTLE_ENDIAN__;PBUF_POOL_SIZE=2;TCP_WND=2*TCP_MSS;HTTPD_USE_CUSTOM_FSDATA=0;CFG_TUSB_MCU=OPT_MCU_RX65X;IR_USB0_USBI0=IR_PERIB_INTB185;IER_USB0_USBI0=IER_PERIB_INTB185;IEN_USB0_USBI0=IEN_PERIB_INTB185;IODEFINE_H_HISTORY;SSIZE_MAX=INT_MAX;_DEBUG;HSBHOST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\softgun;..\softgun\stdinc;..\softgun\devices\sdcard;..\softgun\rx;..\tinyusb\hw;..\tinyusb\hw\mcu\renesas\rx\rx65n;..\tinyusb\hw\bsp\rx\boards\rx65n_target;..\tinyusb\lib\lwip\src\include;..\tinyusb\lib\lwip\src\include\ipv4;..\tinyusb\lib\lwip\src\include\lwip\apps;..\tinyusb\lib\networking;..\tinyusb\examples\host\cdc_msc_hid\src;..\tinyusb\src;.</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>__GNUC__;__RX_LITTLE_ENDIAN__;PBUF_POOL_SIZE=2;TCP_WND=2*TCP_MSS;HTTPD_USE_CUSTOM_FSDATA=0;CFG_TUSB_MCU=OPT_MCU_RX65X;IR_USB0_USBI0=IR_PERIB_INTB185;IER_USB0_USBI0=IER_PERIB_INTB185;IEN_USB0_USBI0=IEN_PERIB_INTB185;IODEFINE_H_HISTORY;SSIZE_MAX=INT_MAX;NDEBUG;HSBHOST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\softgun;..\softgun\stdinc;..\softgun\devices\sdcard;..\softgun\rx;..\tinyusb\hw;..\tinyusb\hw\mcu\renesas\rx\rx65n;..\tinyusb\hw\bsp\rx\boards\rx65n_target;..\tinyusb\lib\lwip\src\include;..\tinyusb\lib\lwip\src\include\ipv4;..\tinyusb\lib\lwip\src\include\lwip\apps;..\tinyusb\lib\networking;..\tinyusb\examples\host\cdc_msc_hid\src;..\tinyusb\src;.</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\softgun\bus.c" />
+    <ClCompile Include="..\softgun\clock.c" />
+    <ClCompile Include="..\softgun\configfile.c" />
+    <ClCompile Include="..\softgun\cycletimer.c" />
+    <ClCompile Include="..\softgun\devices\sdcard\mmcard.c" />
+    <ClCompile Include="..\softgun\devices\sdcard\mmc_crc.c" />
+    <ClCompile Include="..\softgun\devices\sdcard\sdhci.c" />
+    <ClCompile Include="..\softgun\devices\sdcard\sd_spi.c" />
+    <ClCompile Include="..\softgun\devices\serial\null_uart.c" />
+    <ClCompile Include="..\softgun\diskimage.c" />
+    <ClCompile Include="..\softgun\ihex.c" />
+    <ClCompile Include="..\softgun\loader.c" />
+    <ClCompile Include="..\softgun\mmcdev.c" />
+    <ClCompile Include="..\softgun\rx\clk_rx65.c" />
+    <ClCompile Include="..\softgun\rx\cmt_rx65n.c" />
+    <ClCompile Include="..\softgun\rx\icu_rx65.c" />
+    <ClCompile Include="..\softgun\rx\ioport_rx65n.c" />
+    <ClCompile Include="..\softgun\rx\mpc_rx65.c" />
+    <ClCompile Include="..\softgun\rx\sci_rx65n.c" />
+    <ClCompile Include="..\softgun\rx\usb_rx.c" />
+    <ClCompile Include="..\softgun\serial.c" />
+    <ClCompile Include="..\softgun\sglib.c" />
+    <ClCompile Include="..\softgun\sgstring.c" />
+    <ClCompile Include="..\softgun\signode.c" />
+    <ClCompile Include="..\softgun\spidevice.c" />
+    <ClCompile Include="..\softgun\srec.c" />
+    <ClCompile Include="..\softgun\strhash.c" />
+    <ClCompile Include="..\softgun\usbstdrq.c" />
+    <ClCompile Include="..\softgun\xy_hash.c" />
+    <ClCompile Include="..\softgun\xy_tree.c" />
+    <ClCompile Include="..\tinyusb\examples\host\cdc_msc_hid\src\hid_app.c" />
+    <ClCompile Include="..\tinyusb\examples\host\cdc_msc_hid\src\main.c" />
+    <ClCompile Include="..\tinyusb\examples\host\cdc_msc_hid\src\msc_app.c" />
+    <ClCompile Include="..\tinyusb\hw\bsp\board.c" />
+    <ClCompile Include="..\tinyusb\hw\bsp\rx\boards\gr_rose\gr_rose.c" />
+    <ClCompile Include="..\tinyusb\hw\mcu\renesas\rx\rx65n\vects.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\tinyusb\lib\lwip\src\apps\http\fs.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\apps\http\fsdata.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\tinyusb\lib\lwip\src\apps\http\httpd.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\altcp.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\altcp_alloc.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\altcp_tcp.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\def.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\dns.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\inet_chksum.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\init.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ip.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv4\autoip.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv4\dhcp.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv4\etharp.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv4\icmp.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv4\igmp.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv4\ip4.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv4\ip4_addr.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv4\ip4_frag.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv6\dhcp6.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv6\ethip6.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv6\icmp6.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv6\inet6.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv6\ip6.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv6\ip6_addr.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv6\ip6_frag.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv6\mld6.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\ipv6\nd6.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\mem.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\memp.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\netif.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\pbuf.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\raw.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\stats.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\sys.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\tcp.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\tcp_in.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\tcp_out.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\timeouts.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\core\udp.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\netif\ethernet.c" />
+    <ClCompile Include="..\tinyusb\lib\lwip\src\netif\slipif.c" />
+    <ClCompile Include="..\tinyusb\src\class\audio\audio_device.c" />
+    <ClCompile Include="..\tinyusb\src\class\cdc\cdc_device.c" />
+    <ClCompile Include="..\tinyusb\src\class\cdc\cdc_host.c" />
+    <ClCompile Include="..\tinyusb\src\class\cdc\cdc_rndis_host.c" />
+    <ClCompile Include="..\tinyusb\src\class\dfu\dfu_device.c" />
+    <ClCompile Include="..\tinyusb\src\class\dfu\dfu_rt_device.c" />
+    <ClCompile Include="..\tinyusb\src\class\hid\hid_device.c" />
+    <ClCompile Include="..\tinyusb\src\class\hid\hid_host.c" />
+    <ClCompile Include="..\tinyusb\src\class\midi\midi_device.c" />
+    <ClCompile Include="..\tinyusb\src\class\msc\msc_device.c" />
+    <ClCompile Include="..\tinyusb\src\class\msc\msc_host.c" />
+    <ClCompile Include="..\tinyusb\src\class\net\ncm_device.c" />
+    <ClCompile Include="..\tinyusb\src\class\usbtmc\usbtmc_device.c" />
+    <ClCompile Include="..\tinyusb\src\class\vendor\vendor_device.c" />
+    <ClCompile Include="..\tinyusb\src\class\vendor\vendor_host.c" />
+    <ClCompile Include="..\tinyusb\src\common\tusb_fifo.c" />
+    <ClCompile Include="..\tinyusb\src\host\hub.c" />
+    <ClCompile Include="..\tinyusb\src\host\usbh.c" />
+    <ClCompile Include="..\tinyusb\src\host\usbh_control.c" />
+    <ClCompile Include="..\tinyusb\src\portable\ehci\ehci.c" />
+    <ClCompile Include="..\tinyusb\src\portable\renesas\usba\hcd_usba.c" />
+    <ClCompile Include="..\tinyusb\src\tusb.c" />
+    <ClCompile Include="device.c" />
+    <ClCompile Include="dllmain.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\TinyUSB\TinyUSB\softgun\usbhost.h" />
+    <ClInclude Include="..\softgun\bus.h" />
+    <ClInclude Include="..\softgun\byteorder.h" />
+    <ClInclude Include="..\softgun\clock.h" />
+    <ClInclude Include="..\softgun\compiler_extensions.h" />
+    <ClInclude Include="..\softgun\configfile.h" />
+    <ClInclude Include="..\softgun\cycletimer.h" />
+    <ClInclude Include="..\softgun\devices\sdcard\mmcard.h" />
+    <ClInclude Include="..\softgun\devices\sdcard\mmc_crc.h" />
+    <ClInclude Include="..\softgun\devices\sdcard\sdhci.h" />
+    <ClInclude Include="..\softgun\devices\sdcard\sd_spi.h" />
+    <ClInclude Include="..\softgun\diskimage.h" />
+    <ClInclude Include="..\softgun\diskimage_file.h" />
+    <ClInclude Include="..\softgun\ihex.h" />
+    <ClInclude Include="..\softgun\loader.h" />
+    <ClInclude Include="..\softgun\mmcdev.h" />
+    <ClInclude Include="..\softgun\mmcproto.h" />
+    <ClInclude Include="..\softgun\rx\clk_rx65.h" />
+    <ClInclude Include="..\softgun\rx\cmt_rx65n.h" />
+    <ClInclude Include="..\softgun\rx\icu_rx65.h" />
+    <ClInclude Include="..\softgun\rx\ioport_rx65n.h" />
+    <ClInclude Include="..\softgun\rx\mpc_rx65.h" />
+    <ClInclude Include="..\softgun\rx\sci_rx65n.h" />
+    <ClInclude Include="..\softgun\rx\usb_rx.h" />
+    <ClInclude Include="..\softgun\serial.h" />
+    <ClInclude Include="..\softgun\sglib.h" />
+    <ClInclude Include="..\softgun\sgstring.h" />
+    <ClInclude Include="..\softgun\sgtypes.h" />
+    <ClInclude Include="..\softgun\signode.h" />
+    <ClInclude Include="..\softgun\spidevice.h" />
+    <ClInclude Include="..\softgun\srec.h" />
+    <ClInclude Include="..\softgun\stdinc\libgen.h" />
+    <ClInclude Include="..\softgun\stdinc\unistd.h" />
+    <ClInclude Include="..\softgun\strhash.h" />
+    <ClInclude Include="..\softgun\usbdevice.h" />
+    <ClInclude Include="..\softgun\usbproto.h" />
+    <ClInclude Include="..\softgun\usbstdrq.h" />
+    <ClInclude Include="..\softgun\xy_hash.h" />
+    <ClInclude Include="..\softgun\xy_tree.h" />
+    <ClInclude Include="..\tinyusb\examples\host\cdc_msc_hid\src\tusb_config.h" />
+    <ClInclude Include="..\tinyusb\hw\bsp\ansi_escape.h" />
+    <ClInclude Include="..\tinyusb\hw\bsp\board.h" />
+    <ClInclude Include="..\tinyusb\hw\mcu\renesas\rx\rx65n\interrupt_handlers.h" />
+    <ClInclude Include="..\tinyusb\hw\mcu\renesas\rx\rx65n\iodefine.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\apps\http\httpd_structs.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\altcp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\altcp_tcp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\api.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\apps\fs.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\apps\httpd.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\apps\httpd_opts.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\arch.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\autoip.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\debug.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\def.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\dhcp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\dhcp6.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\dns.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\err.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\etharp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\ethip6.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\icmp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\icmp6.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\igmp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\inet_chksum.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\init.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\ip.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\ip4.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\ip4_addr.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\ip4_frag.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\ip6.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\ip6_addr.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\ip6_frag.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\ip6_zone.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\ip_addr.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\mem.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\memp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\mld6.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\nd6.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\netbuf.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\netdb.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\netif.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\opt.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\pbuf.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\priv\api_msg.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\priv\memp_priv.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\priv\memp_std.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\priv\mem_priv.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\priv\nd6_priv.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\priv\raw_priv.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\priv\sockets_priv.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\priv\tcpip_priv.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\priv\tcp_priv.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\etharp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\ethernet.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\iana.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\icmp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\icmp6.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\ieee.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\ip.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\ip4.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\ip6.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\nd6.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\tcp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\prot\udp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\raw.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\sio.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\snmp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\sockets.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\stats.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\sys.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\tcp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\tcpbase.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\timeouts.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\lwip\udp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\netif\etharp.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\netif\ethernet.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\netif\ppp\ppp_impl.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\netif\ppp\ppp_opts.h" />
+    <ClInclude Include="..\tinyusb\lib\lwip\src\include\netif\slipif.h" />
+    <ClInclude Include="..\tinyusb\src\class\audio\audio.h" />
+    <ClInclude Include="..\tinyusb\src\class\audio\audio_device.h" />
+    <ClInclude Include="..\tinyusb\src\class\cdc\cdc.h" />
+    <ClInclude Include="..\tinyusb\src\class\cdc\cdc_device.h" />
+    <ClInclude Include="..\tinyusb\src\class\cdc\cdc_host.h" />
+    <ClInclude Include="..\tinyusb\src\class\cdc\cdc_rndis.h" />
+    <ClInclude Include="..\tinyusb\src\class\cdc\cdc_rndis_host.h" />
+    <ClInclude Include="..\tinyusb\src\class\dfu\dfu.h" />
+    <ClInclude Include="..\tinyusb\src\class\dfu\dfu_device.h" />
+    <ClInclude Include="..\tinyusb\src\class\dfu\dfu_rt_device.h" />
+    <ClInclude Include="..\tinyusb\src\class\hid\hid.h" />
+    <ClInclude Include="..\tinyusb\src\class\hid\hid_device.h" />
+    <ClInclude Include="..\tinyusb\src\class\hid\hid_host.h" />
+    <ClInclude Include="..\tinyusb\src\class\midi\midi.h" />
+    <ClInclude Include="..\tinyusb\src\class\midi\midi_device.h" />
+    <ClInclude Include="..\tinyusb\src\class\msc\msc.h" />
+    <ClInclude Include="..\tinyusb\src\class\msc\msc_device.h" />
+    <ClInclude Include="..\tinyusb\src\class\msc\msc_host.h" />
+    <ClInclude Include="..\tinyusb\src\class\net\ncm.h" />
+    <ClInclude Include="..\tinyusb\src\class\net\net_device.h" />
+    <ClInclude Include="..\tinyusb\src\class\usbtmc\usbtmc.h" />
+    <ClInclude Include="..\tinyusb\src\class\usbtmc\usbtmc_device.h" />
+    <ClInclude Include="..\tinyusb\src\class\vendor\vendor_device.h" />
+    <ClInclude Include="..\tinyusb\src\class\vendor\vendor_host.h" />
+    <ClInclude Include="..\tinyusb\src\common\tusb_common.h" />
+    <ClInclude Include="..\tinyusb\src\common\tusb_compiler.h" />
+    <ClInclude Include="..\tinyusb\src\common\tusb_error.h" />
+    <ClInclude Include="..\tinyusb\src\common\tusb_fifo.h" />
+    <ClInclude Include="..\tinyusb\src\common\tusb_timeout.h" />
+    <ClInclude Include="..\tinyusb\src\common\tusb_types.h" />
+    <ClInclude Include="..\tinyusb\src\common\tusb_verify.h" />
+    <ClInclude Include="..\tinyusb\src\host\hcd.h" />
+    <ClInclude Include="..\tinyusb\src\host\hcd_attr.h" />
+    <ClInclude Include="..\tinyusb\src\host\hub.h" />
+    <ClInclude Include="..\tinyusb\src\host\usbh.h" />
+    <ClInclude Include="..\tinyusb\src\host\usbh_classdriver.h" />
+    <ClInclude Include="..\tinyusb\src\osal\osal.h" />
+    <ClInclude Include="..\tinyusb\src\osal\osal_none.h" />
+    <ClInclude Include="..\tinyusb\src\portable\ehci\ehci.h" />
+    <ClInclude Include="..\tinyusb\src\portable\ehci\ehci_api.h" />
+    <ClInclude Include="..\tinyusb\src\tusb.h" />
+    <ClInclude Include="..\tinyusb\src\tusb_option.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
