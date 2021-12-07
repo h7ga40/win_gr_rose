@@ -35,6 +35,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdbool.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -48,7 +49,8 @@
  * ----------------------------------------------------
  */
 static int
-hexparse_n(const char *str,unsigned int *retval,int bytes) {
+hexparse_n(const char *str, unsigned int *retval, int bytes)
+{
 	int i;
 		unsigned int val=0;
 	for(i=0;i<(bytes<<1);i++) {
@@ -69,7 +71,8 @@ hexparse_n(const char *str,unsigned int *retval,int bytes) {
 }
 
 static inline int
-hexparse(const char *str,uint8_t *retval) {
+hexparse(const char *str, uint8_t * retval)
+{
 	int i;
 	unsigned int val=0;
 	for(i=0;i<2;i++) {
@@ -108,19 +111,22 @@ parse_srec_data(uint8_t *buf,const char *line,int count,uint32_t sum)
 		return -99;
 	}
 	if(sum!=chksum) {
-		fprintf(stderr,"checksum error in srecord \"%s\" sum %02x chksum %08x\n",line,sum,chksum);
+        fprintf(stderr, "checksum error in srecord \"%s\" sum %02x chksum %08x\n", line,
+                sum, chksum);
 //warning no checksum
 		return -1;
 	}
 	return count-1;
 }
+
 /*
  * ----------------------------------
  * Read one SRecord (one line) 
  * ----------------------------------
  */
 static int 
-read_record(FILE *file,uint32_t *addr,uint8_t *buf) {
+read_record(FILE * file, uint32_t * addr, uint8_t * buf)
+{
 	char line[257];
 	int len;
 	unsigned int sum;
@@ -173,7 +179,9 @@ read_record(FILE *file,uint32_t *addr,uint8_t *buf) {
 				fprintf(stderr,"Can not parse S1 address\n");
 				return -34;
 			}
-			sum=(*addr&0xff)+((*addr>>8)&0xff) +((*addr>>16)&0xff) + ((*addr>>24)&0xff)+count;
+            sum =
+                (*addr & 0xff) + ((*addr >> 8) & 0xff) + ((*addr >> 16) & 0xff) +
+                ((*addr >> 24) & 0xff) + count;
 			return parse_srec_data(buf,line+8,count-2,sum);
 
 		/* S2 Data line with 3 Byte address */
@@ -182,7 +190,9 @@ read_record(FILE *file,uint32_t *addr,uint8_t *buf) {
 				fprintf(stderr,"Can not parse S2 address\n");
 				return -34;
 			}
-			sum=(*addr&0xff)+((*addr>>8)&0xff) +((*addr>>16)&0xff) + ((*addr>>24)&0xff)+count;
+            sum =
+                (*addr & 0xff) + ((*addr >> 8) & 0xff) + ((*addr >> 16) & 0xff) +
+                ((*addr >> 24) & 0xff) + count;
 			return parse_srec_data(buf,line+10,count-3,sum);
 
 		/* S3 Data line with 4 Byte address */
@@ -191,7 +201,9 @@ read_record(FILE *file,uint32_t *addr,uint8_t *buf) {
 				fprintf(stderr,"Can not parse S3 address\n");
 				return -34;
 			}
-			sum=(*addr&0xff)+((*addr>>8)&0xff) +((*addr>>16)&0xff) + ((*addr>>24)&0xff)+count;
+            sum =
+                (*addr & 0xff) + ((*addr >> 8) & 0xff) + ((*addr >> 16) & 0xff) +
+                ((*addr >> 24) & 0xff) + count;
 			return parse_srec_data(buf,line+12,count-4,sum);
 
 		case '5':
@@ -227,6 +239,40 @@ read_record(FILE *file,uint32_t *addr,uint8_t *buf) {
 	return 0;	
 }
 
+/**
+ ***************************************************************
+ * \fn bool SRecord_FileIsSRecord(char *filename); 
+ * Check if a file is a motorola Srecord file by parsing 
+ * the first three lines.
+ ***************************************************************
+ */
+
+bool
+SRecord_FileIsSRecord(char *filename)
+{
+    FILE *file = fopen(filename, "r");
+    bool result = true;
+    int lines;
+    uint32_t addr = 0;
+    uint8_t buf[100];
+    if (!file) {
+        return false;
+    }
+    for (lines = 0; lines < 3; lines++) {
+        int count;
+        if (feof(file)) {
+            result = false;
+            break;
+        }
+        if ((count = read_record(file, &addr, buf)) < 0) {
+            result = false;
+            break;
+        }
+    }
+    fclose(file);
+    return result;
+}
+
 int64_t
 XY_LoadSRecordFile(char *filename,XY_SRecCallback *callback,void *clientData) 
 {
@@ -255,10 +301,10 @@ XY_LoadSRecordFile(char *filename,XY_SRecCallback *callback,void *clientData)
 	return totallen;
 }
 
-
 #ifdef TEST
 int
-main(int argc,char *argv[]) {
+main(int argc, char *argv[])
+{
 	if(argc<2) {
 		fprintf(stderr,"Argument missing\n");
 		__builtin_trap();

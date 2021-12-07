@@ -360,7 +360,7 @@ SpiDev_New(const char *name, SpiDev_XmitEventProc * proc, void *owner)
 	spi->ss = SigNode_New("%s.ss", name);
 	if (!spi->miso || !spi->mosi || !spi->sck || !spi->ss) {
 		fprintf(stderr, "Can not create signal lines for SPI\n");
-		exit(1);
+		__builtin_trap();
 	}
 	spi->zerodelay = 0;
 	Config_ReadUInt32(&spi->zerodelay, name, "zerodelay");

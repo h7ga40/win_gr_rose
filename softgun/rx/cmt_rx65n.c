@@ -286,7 +286,7 @@ timer_event(void *eventData)
 		fprintf(stderr, "Cnt not 0 after event %u, acc %" PRIu64 "\n",
 			cmt->regCMCNT, cmt->accCycles);
 		//}
-		//exit(1);
+		//__builtin_trap();
 	}
 	update_timeout(cmt);
 }

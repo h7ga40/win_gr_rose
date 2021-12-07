@@ -490,7 +490,7 @@ ipr_write(void *clientData, uint32_t value, uint32_t address, int rqlen)
         Irq *irq; 
         if ((irqNr < 0) || (irqNr > 255)) {
             fprintf(stderr, "Bug: Bad irqList\n");
-            exit(1);
+            __builtin_trap();
         }
         irq = &icu->irq[irqNr];
         fprintf(stderr, "IPR write IRQ %u addr %08x\n", irq->irqNr, address);
@@ -774,7 +774,7 @@ RX65ICU_New(const char *name, int variant)
             break;
         default:
             fprintf(stderr, "Unknown RX ICU variant %d\n", variant);
-            exit(1);
+            __builtin_trap();
     }
     icu->bdev.first_mapping = NULL;
     icu->bdev.Map = ICU_Map;
@@ -806,12 +806,12 @@ RX65ICU_New(const char *name, int variant)
                 break;
             default:
                 fprintf(stderr, "Unknown RX ICU variant %d\n", variant);
-                exit(1);
+                __builtin_trap();
         }
         irq->sigIrq = SigNode_New("%s.irq%d", name, i);
         if (!irq->sigIrq) {
             fprintf(stderr, "Can not create interrupt line\n");
-            exit(1);
+            __builtin_trap();
         }
         SigNode_Trace(irq->sigIrq, SigIrqTraceProc, irq);
     }
@@ -820,7 +820,7 @@ RX65ICU_New(const char *name, int variant)
     icu->sigSWINT2R = SigNode_New("%s.swint2", name);
     if (!icu->sigIrqAck || !icu->sigSWINT) {
         fprintf(stderr, "%s: can not create IRQ line\n", name); 
-        exit(1);
+        __builtin_trap();
     }
     SigNode_Trace(icu->sigIrqAck, AckInterrupt, icu);
     fprintf(stderr, "Created RX65 Interrupt Control Unit\n");

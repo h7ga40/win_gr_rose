@@ -128,14 +128,14 @@ romwt_verify(RxClk *rc)
             break;
         default:
             fprintf(stderr, "Illegal Wait states for Flash in ROMWT register\n");
-            exit(1);
+            __builtin_trap();
             break;
     }
     iclkfreq = Clock_Freq(rc->clkICLK);
     flashFreq = iclkfreq / div;
     if (flashFreq > (50 * 1000 * 1000)) {
         fprintf(stderr, "Error: ROMWT Flash Frequency to high\n");
-        exit(1);
+        __builtin_trap();
     }
 }
  
@@ -167,11 +167,11 @@ update_pllclock(RxClk *rc)
             default:
                 div = 1;
                 fprintf(stderr, "Illegal PLLCR value 0x%04x\n", rc->regPLLCR);
-                exit(1);
+                __builtin_trap();
         }
         if ((stc > 0x3b) || (stc < 0x13)) {
                 fprintf(stderr, "Illegal PLLCR STC value %u (0x%04x)\n",stc,  rc->regPLLCR);
-                exit(1);
+                __builtin_trap();
         }
         mul = 20 + (stc - 0x13);
         if (pllsrcsel) {
@@ -311,7 +311,7 @@ sckcr2_write(void *clientData, uint32_t value, uint32_t address, int rqlen)
     uck = (value >> 4) & 0xf;
     if ((value & 0xff0f) != 0x0001) {
         fprintf(stderr, "SCKCR2: Bad Reserved Bits: 0x%04x\n", value);
-        exit(1);
+        __builtin_trap();
     }
     switch (uck) {
        case 1:
@@ -348,7 +348,7 @@ sckcr3_write(void *clientData, uint32_t value, uint32_t address, int rqlen)
     unsigned int cksel = (value >> 8) & 7;
     if ((value & 0xF8FF) != 0) {
         fprintf(stderr, "SCKCR3: Write illegal value 0x%04x\n", value);
-        exit(1);
+        __builtin_trap();
     }
     switch (cksel) {
         case 0: /* LOCO */
@@ -369,7 +369,7 @@ sckcr3_write(void *clientData, uint32_t value, uint32_t address, int rqlen)
             break;
         default:
             fprintf(stderr, "SCKCR3: illegal cksel %u\n", cksel);
-            exit(1);
+            __builtin_trap();
     }
 }
 
@@ -538,7 +538,7 @@ hococr2_write(void *clientData, uint32_t value, uint32_t address, int rqlen)
     uint8_t hcfrq = value & 3;
     if ((rc->regHOCOCR & 1) == 0) {
         fprintf(stderr, "Prohibited writing to HOCOCR2 while Oscillator is enabled\n");
-        exit(1);
+        __builtin_trap();
     }
     switch (hcfrq) {
         case 0:
@@ -552,7 +552,7 @@ hococr2_write(void *clientData, uint32_t value, uint32_t address, int rqlen)
             break;
         default:
             fprintf(stderr, "Illegal HOCO Frequence selection\n");
-            exit(1);
+            __builtin_trap();
             break;
     }
 }

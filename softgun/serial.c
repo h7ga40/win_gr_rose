@@ -259,7 +259,7 @@ Uart_New(const char *uart_name, UartRxEventProc * rxEventProc, UartFetchTxCharPr
 		}
 		if (!le) {
 			fprintf(stderr, "No serial emulator of type \"%s\" found\n", type);
-			exit(1);
+			__builtin_trap();
 		}
 	}
 	CycleTimer_Init(&serdev->rxTimer, SerialBackend_DoReceive, serdev);

@@ -698,7 +698,7 @@ SCI_New(const char *name)
 	sci->sigIrqTEI = SigNode_New("%s.irqTEI", name);
 	if (!sci->sigIrqERI || !sci->sigIrqRXI || !sci->sigIrqTXI || !sci->sigIrqTEI) {
 		fprintf(stderr, "Can not create Interrupt lines for %s\n", name);
-		exit(1);
+		__builtin_trap();
 	}
 	sprintf(spidev_clkname, "%s.spi.clk", name);
 	sprintf(uart_syncclkname, "%s.sync", name);

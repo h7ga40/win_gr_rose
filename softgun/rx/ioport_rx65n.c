@@ -422,7 +422,7 @@ Rx65nIoPorts_New(const char *name)
 		iop->rxIoPort = rio;
 		if (portname[i] == 0) {
 			fprintf(stderr, "Not enough portnames: %s\n", portname);
-			exit(1);
+			__builtin_trap();
 		}
 		iop->portNr = i;
 		for (j = 0; j < 8; j++) {
@@ -447,7 +447,7 @@ Rx65nIoPorts_New(const char *name)
 			    || !pin->sigPMR || !pin->sigPMO || !pin->sigPMI
 			    || !pin->sigODR || !pin->sigPO || !pin->sigPDR || !pin->sigPODR) {
 				fprintf(stderr, "Can not create io port %d pin %d\n", i, j);
-				exit(1);
+				__builtin_trap();
 			}
 			SigNode_Set(pin->sigPU, SIG_PULLUP);
 			SigNode_Set(pin->sigODR, SIG_LOW);
