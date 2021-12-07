@@ -198,16 +198,17 @@ void CheckSignals();
 
 unsigned long sim_thread(void *arg)
 {
+	unsigned long result = 0;
 	LARGE_INTEGER freq;
 	LARGE_INTEGER btime, ntime, dtime;
-	DWORD ret;
+	DWORD ret, ret2;
 	uint64_t next;
 
 	QueryPerformanceFrequency(&freq);
 
 	QueryPerformanceCounter(&ntime);
 
-	while (!g_ExitFlag) {
+	while (!g_ExitFlag && result == 0) {
 		if (firstCycleTimerTimeout == ~0ULL) {
 			ret = WaitForSingleObject(g_StartEvent, INFINITE);
 		}
@@ -217,6 +218,29 @@ unsigned long sim_thread(void *arg)
 
 		if (g_ExitFlag || ((ret != WAIT_OBJECT_0) && (ret != WAIT_TIMEOUT)))
 			break;
+
+		if (ret == WAIT_TIMEOUT) {
+			for (;;) {
+				ret2 = WaitForSingleObject(g_SimMutex, 0);
+				if (ret2 == WAIT_OBJECT_0)
+					break;
+				if (g_ExitFlag || (ret2 != WAIT_TIMEOUT)) {
+					result = GetLastError();
+					break;
+				}
+
+				ret = WaitForSingleObject(g_StartEvent, 0);
+				if (ret == WAIT_OBJECT_0)
+					break;
+				if (g_ExitFlag || (ret != WAIT_TIMEOUT)) {
+					result = GetLastError();
+					break;
+				}
+			}
+		}
+		else {
+			ret2 = WAIT_TIMEOUT;
+		}
 
 		btime = ntime;
 
@@ -232,17 +256,7 @@ unsigned long sim_thread(void *arg)
 		next = CycleCounter + (CycleTimerRate * dtime.QuadPart / freq.QuadPart);
 
 		if (firstCycleTimerTimeout < next) {
-			InterlockedExchange64((LONG64 *)&CycleCounter, firstCycleTimerTimeout);
-
-			DWORD ret2;
-			if (ret == WAIT_TIMEOUT) {
-				ret2 = WaitForSingleObject(g_SimMutex, 0);
-				if (ret2 == WAIT_TIMEOUT) {
-					ret = WaitForSingleObject(g_StartEvent, INFINITE);
-					if (g_ExitFlag || (ret != WAIT_OBJECT_0))
-						break;
-				}
-			}
+			CycleCounter = firstCycleTimerTimeout;
 
 			__try
 			{
@@ -251,16 +265,20 @@ unsigned long sim_thread(void *arg)
 			}
 			__except (PageFaultExceptionFilter(GetExceptionInformation()))
 			{
-				return GetLastError();
+				result = GetLastError();
 			}
-
-			ReleaseMutex(g_SimMutex);
 		}
 		else {
-			InterlockedExchange64((LONG64 *)&CycleCounter, next);
+			CycleCounter = next;
 		}
 
-		SetEvent(g_EndEvent);
+		if (ret2 == WAIT_OBJECT_0) {
+			ReleaseMutex(g_SimMutex);
+		}
+
+		if (ret == WAIT_OBJECT_0) {
+			SetEvent(g_EndEvent);
+		}
 	}
 
 	return 0;
